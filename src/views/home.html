@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="../assets/css/standard.css"/>
+    <link rel="stylesheet" href="../assets/css/custom.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Fetch Project</title>
+    <script src="../assets/js/fetch.js"></script>
+    
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <nav class="navbar_custom customDark">
+        <div class="container">
+        <div class="row">
+            <div class="col-2">Logo</div>
+            <ul class="col-10 d-flex justify-content-end">
+                <a href="./home.html" class="navItem"><li class="px-3 ">Ana Sayfa</li></a>
+                <a href="./cart.html"  class="navItem"><li class="px-3 ">Sepetim</li></a>
+                
+                
+            </ul>
+        </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <div id="App">
+
+
+        <div class="container-fluid mt-3">
+
+        <div class="row">
+
+        <div class="col-3 bordered" id="filter">
+                <div class="col-10 filter">
+
+                    <div class="col-12   filter_title">
+
+                        <span class="">KATEGORİLER</span>
+
+                    </div>
+                    
+
+
+                </div> 
+
+            
+            </div>
+            
+            <div class="col-9 " >
+                <div class="row d-flex" id="products">
+                    
+
+                </div>
+                
+            </div>
+            
+    
+        </div>
+        
+
+
+
+
+
+
+
+        </div>
+       
+        
+    </div>
+</body>
+
+
+
+<style>
+    
+</style>
+
+
+
+
+
+
+
+<script src="../assets/js/cart.js"></script>
+
+
+<script src="../assets/js/script.js"></script>
+
+
+
+<script>
+
+    $(document).ready(function(){
+    
+        getData.then(response=>{
+            setCategories(response.FILTER)
+            setVariants(response.FILTER)
+            setBrands(response.FILTER)
+            setModelYears(response.FILTER)
+            setSuppliers(response.FILTER)
+            setPrices(response.FILTER)
+            setProducts(response.PRODUCTS)
+            
+        })
+    
+    })
+
+</script>
+
+
+
+
+</html>

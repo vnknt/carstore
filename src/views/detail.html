@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../assets/css/standard.css" />
+    <link rel="stylesheet" href="../assets/css/custom.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    
+    <title>Detail</title>
+</head>
+
+<body>
+
+    <nav class="navbar_custom customDark">
+        <div class="container">
+        <div class="row">
+            <div class="col-2">Logo</div>
+            <ul class="col-10 d-flex justify-content-end">
+                <a href="./home.html" class="navItem"><li class="px-3 ">Ana Sayfa</li></a>
+                <a href="./cart.html"  class="navItem"><li class="px-3 ">Sepetim</li></a>
+                
+                
+            </ul>
+        </div>
+
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+    <div class="container pt-5">
+
+        <div class="row ">
+            <div class="p-0 col-xs-12 col-lg-6">
+                <div class="p-0 d-flex justify-content-center">
+                    <div class="p-0 col-12 d-flex justify-content-center imgZoom " style="overflow:hidden;">
+                        <img id="productImage" class=""  style="width:100%;height:auto;object-fit:contain !important;" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-6  d-flex flex-column justify-content-around">
+                <div class="col-12  ">
+                    <div class="col-12 pt-3 d-flex justify-content-center ">
+                        <h3 id="productName"></h3>
+                    </div>
+                    <div class="col-12 pt-3 ">
+                        <span>Renk : <span id="productColor"></span></span>
+                    </div>
+                    <div class="col-12 pt-3 ">
+                        <span>Model : <span id="productModelYear"></span> </span>
+                    </div>
+                    <div class="col-12 pt-3 ">
+                        <span>Açıklama : <span id="productDescription"> <span></span>
+                    </div>
+
+                </div>
+                <div class="col-12  ">
+                    <div class="col-12 pt-3 d-flex  justify-content-between" style="align-items: center;">
+
+                        <h4 id="productPrice"></h4>
+                        <button class="btn btn-primary w-50" id="addToCartBtn" style="height:50px;">Satın Al</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div >
+            <canvas style="position:fixed;left:50%;top:20%;display:none" id="imgZoomedPart" width="300" height="300" 
+                style="border:3px solid">
+                
+            </canvas>
+        </div>
+
+
+    </div>
+
+    <div class="" id="productDetail"></div>
+
+
+</body>
+
+
+
+
+
+<script  src="../assets/js/script.js"></script>
+<script   src="../assets/js/cart.js"></script>
+<script   src="../assets/js/toast.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        getData.then(response => {
+
+
+            products.set(response.PRODUCTS)
+            let currentUrl = new URL(window.location);
+            let productId = currentUrl.searchParams.get("id")
+
+            if (productId === null || productId == "") {
+
+                let path = document.location.pathname
+                let dir = path.slice(1, path.lastIndexOf('/'))
+                window.location.href = dir += "/home.html"
+                return
+            }
+
+
+
+            let car = getProductById(productId)
+            if(car===undefined){
+                let path = document.location.pathname
+                let dir = path.slice(1, path.lastIndexOf('/'))
+                window.location.href = dir += "/home.html"
+            }
+
+            setProductDetails(car)
+
+            console.log(car)
+            console.log(productId)
+            
+
+            
+
+            
+        })
+
+
+
+
+
+
+
+
+
+
+
+    })
+
+
+
+    function setProductDetails(product){
+        console.log(product)
+        
+
+        $("#productImage").attr('src',"../assets/img/images"+product.img_url+".jpg")
+        $("#productName").text(product.brandName + " "+product.name)
+        $("#productColor").text(product.color )
+        $("#productModelYear").text(product.modelYear )
+        $("#productDescription").text(`${product.brandName} markasına ait  ${product.color} renkli ${product.modelYear} Model ${product.name} ile hayatınıza renk katın...
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, optio.
+        ` )
+        $("#productPrice").text("Fiyat : "+numberToPrice(product.price)+" TL")
+        $("#addToCartBtn").on("click",function(){
+
+            addToCart(product.id)
+
+        })
+    }
+
+
+
+</script>
+
+<script src="../assets/js/imgZoomer.js"></script>
+</html>
